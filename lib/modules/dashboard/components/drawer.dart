@@ -1,44 +1,105 @@
-// ignore_for_file: unnecessary_new
-
+import 'package:application/shared/auth/auth_controller.dart';
+import 'package:application/shared/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class DrawerDashboard extends StatefulWidget {
+class DrawerDashboard extends StatelessWidget {
+  final String username;
+  final bool isAdmin;
+
   const DrawerDashboard({
     Key? key,
+    required this.username,
+    required this.isAdmin,
   }) : super(key: key);
 
   @override
-  State<DrawerDashboard> createState() => _DrawerDashboardState();
-}
-
-class _DrawerDashboardState extends State<DrawerDashboard> {
-  @override
   Widget build(BuildContext context) {
-    final params =
-        ModalRoute.of(context)!.settings.arguments as Map<String, String>;
+    final authController = AuthController();
 
     return Drawer(
-      child: new Column(
+      child: Column(
         children: <Widget>[
-          new UserAccountsDrawerHeader(
+          UserAccountsDrawerHeader(
             accountName: Text(
-              params['name'] as String,
+              username,
               style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 15.0),
             ),
-            accountEmail: new Text(
+            accountEmail: Text(
               'email@test.com',
-              style: new TextStyle(
+              style: TextStyle(
                 color: Colors.blueGrey[50],
               ),
             ),
-            currentAccountPicture: const CircleAvatar(
-              backgroundColor: Colors.brown,
-              child: Text("FL"),
+            currentAccountPicture: CircleAvatar(
+              backgroundColor: Colors.white,
+              child: IconButton(
+                iconSize: 40,
+                icon: (isAdmin)
+                    ? const Icon(
+                        Icons.engineering,
+                        color: AppColors.dark,
+                      )
+                    : const Icon(
+                        Icons.face,
+                        color: AppColors.dark,
+                      ),
+                onPressed: () {},
+              ),
             ),
-          )
+          ),
+          if (isAdmin) ...[
+            ListTile(
+              title: const Text('Manutenção de Pedidos'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: const Text('Entrega de Pedidos'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ] else ...[
+            ListTile(
+              title: const Text('Comprar'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: const Text('Meus Pedidos'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: const Text('Status de Entrega'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: const Text('Metodos de pagamento'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+          const Divider(
+            color: AppColors.dark,
+            thickness: 1.0,
+          ),
+          ListTile(
+            title: const Text('Sair'),
+            onTap: () async {
+              Navigator.pop(context);
+              await authController.singOut(context);
+            },
+          ),
         ],
       ),
     );
