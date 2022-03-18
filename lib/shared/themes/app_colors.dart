@@ -10,4 +10,5 @@ class AppColors {
   static const shape = Color(0xFFFAFAFC);
   static const background = Color(0xFFFFFFFF);
   static const dark = Color(0xFF000000);
+  static const subtleBlue = Color.fromARGB(255, 83, 194, 190);
 }

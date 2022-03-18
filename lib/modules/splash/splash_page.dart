@@ -9,8 +9,10 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authController = AuthController();
-    authController.verifyUserSession(context);
     final size = MediaQuery.of(context).size;
+
+    authController.verifyUserSession(context);
+
     return Scaffold(
       backgroundColor: AppColors.background,
       body: Stack(

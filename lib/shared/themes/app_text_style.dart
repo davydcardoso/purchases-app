@@ -108,4 +108,10 @@ class TextStyles {
     fontWeight: FontWeight.w600,
     color: AppColors.body,
   );
+
+  static final titleCardBold = GoogleFonts.lexendDeca(
+    fontSize: 17,
+    fontWeight: FontWeight.w600,
+    color: AppColors.dark,
+  );
 }
