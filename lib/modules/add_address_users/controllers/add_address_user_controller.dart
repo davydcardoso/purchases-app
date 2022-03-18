@@ -20,14 +20,14 @@ Future<void> addAddressUser(
       headers: {
         "content-type": "application/json",
       },
-      body: {
+      body: jsonEncode({
         "usersId": userId,
         "address": address,
         "zipCode": zipCode,
         "complement": "null",
         "city": city,
         "district": "GO"
-      },
+      }),
     );
 
     final Map<String, dynamic> jsonMap = jsonDecode(response.body);
