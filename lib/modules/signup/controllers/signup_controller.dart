@@ -27,15 +27,16 @@ class SignUpController {
         }),
       );
 
-      Map<String, dynamic> jsonMap =
-          Map<String, String>.from(json.decode(response.body));
+      final Map<String, dynamic> jsonMap = jsonDecode(response.body);
 
       switch (response.statusCode) {
         case 201:
+          final userId = jsonMap['userId'] as String;
+
           Navigator.pushReplacementNamed(
             context,
             '/address-create',
-            arguments: {'userId': jsonMap['userId']},
+            arguments: {'userId': userId},
           );
           break;
         default:
