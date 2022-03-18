@@ -4,8 +4,10 @@ class UserModel {
   final String id;
   final String name;
   final String token;
+  final bool isAdmin;
 
   UserModel({
+    required this.isAdmin,
     required this.token,
     required this.name,
     required this.id,
@@ -13,6 +15,7 @@ class UserModel {
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
+      isAdmin: map['user']['isAdmin'],
       name: map['user']['name'],
       id: map['user']['id'],
       token: map['token'],
@@ -30,6 +33,7 @@ class UserModel {
         "id": id,
         "name": name,
         "token": token,
+        "isAdmin": isAdmin,
       };
 
   String toJson() => jsonEncode(toMap());

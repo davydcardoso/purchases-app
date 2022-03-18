@@ -15,6 +15,7 @@ class AuthController {
         context,
         '/dashboard',
         arguments: {
+          'isAdmin': user.isAdmin,
           'token': user.token,
           'name': user.name,
           'id': user.id,
@@ -27,6 +28,7 @@ class AuthController {
 
   Future<void> saveUser(UserModel user) async {
     final instance = await SharedPreferences.getInstance();
+    await instance.setBool('isAdmin', user.isAdmin);
     await instance.setString('token', user.token);
     await instance.setString('name', user.name);
     await instance.setString('id', user.id);
@@ -39,11 +41,13 @@ class AuthController {
     Future.delayed(const Duration(seconds: 2));
 
     if (instance.containsKey('token')) {
+      final isAdmin = instance.get('isAdmin') as bool;
       final token = instance.get('token') as String;
       final name = instance.get('name') as String;
       final id = instance.get('id') as String;
 
       final user = UserModel(
+        isAdmin: isAdmin,
         name: name,
         token: token,
         id: id,
@@ -58,6 +62,7 @@ class AuthController {
 
   Future<void> singOut(BuildContext context) async {
     final instance = await SharedPreferences.getInstance();
+    await instance.remove('isAdmin');
     await instance.remove('token');
     await instance.remove('name');
     await instance.remove('id');
