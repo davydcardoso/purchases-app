@@ -55,4 +55,14 @@ class AuthController {
 
     setUser(context, null);
   }
+
+  Future<void> singOut(BuildContext context) async {
+    final instance = await SharedPreferences.getInstance();
+    await instance.remove('token');
+    await instance.remove('name');
+    await instance.remove('id');
+
+    Navigator.pushReplacementNamed(context, '/login');
+    return;
+  }
 }
