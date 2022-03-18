@@ -11,12 +11,15 @@ class AuthController {
     if (user != null) {
       saveUser(user);
       _user = user;
-      Navigator.pushReplacementNamed(context, '/dashboard',
-          arguments: <String, String>{
-            'token': user.token,
-            'name': user.name,
-            'id': user.id,
-          });
+      Navigator.pushReplacementNamed(
+        context,
+        '/dashboard',
+        arguments: {
+          'token': user.token,
+          'name': user.name,
+          'id': user.id,
+        },
+      );
     } else {
       Navigator.pushReplacementNamed(context, '/login');
     }
