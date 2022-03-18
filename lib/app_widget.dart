@@ -1,4 +1,5 @@
 import 'package:application/modules/add_address_users/add_address_users_page.dart';
+import 'package:application/modules/dashboard/dashboard_page.dart';
 import 'package:application/modules/login/login_page.dart';
 import 'package:application/modules/signup/signup_page.dart';
 import 'package:application/modules/splash/splash_page.dart';
@@ -31,7 +32,7 @@ class AppWidget extends StatelessWidget {
         '/login': (context) => const LoginPage(),
         '/signup': (context) => const SignUpPage(),
         '/address-create': (context) => const AddAddressUserPage(),
-        // '/dashboard': (context) => const DashboardPage(),
+        '/dashboard': (context) => const DashboardPage(),
       },
     );
   }
