@@ -20,11 +20,11 @@ class RoundedPasswordField extends StatelessWidget {
           hintText: "Digite sua senha",
           icon: Icon(
             Icons.lock,
-            color: AppColors.primary,
+            color: AppColors.background,
           ),
           suffixIcon: Icon(
             Icons.visibility,
-            color: AppColors.primary,
+            color: AppColors.background,
           ),
           border: InputBorder.none,
         ),
