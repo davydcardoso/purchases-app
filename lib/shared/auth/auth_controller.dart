@@ -90,6 +90,8 @@ class AuthController {
     await instance.remove('name');
     await instance.remove('id');
 
+    await instance.clear();
+
     Navigator.pushReplacementNamed(context, '/login');
     return;
   }

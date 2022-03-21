@@ -3,6 +3,7 @@ import 'package:application/components/app_bar.dart';
 import 'package:application/components/drawer.dart';
 import 'package:application/components/input_text_field.dart';
 import 'package:application/components/input_text_formated_field.dart';
+import 'package:application/components/method_payment_selector.dart';
 import 'package:application/components/order_summary.dart';
 import 'package:application/components/rounded_button.dart';
 import 'package:application/constants.dart';
@@ -21,6 +22,13 @@ class CheckoutPage extends StatefulWidget {
 
 class _CheckoutPageState extends State<CheckoutPage> {
   final purchasesController = PurchasesController();
+
+  String userName = '';
+  String phoneNumber = '';
+  String email = '';
+  String address = '';
+  String promotionalCode = '';
+  String informationOrder = '';
 
   @override
   Widget build(BuildContext context) {
@@ -61,16 +69,22 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   ),
                   InputTextField(
                     hintText: 'Nome de usuario',
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      userName = value;
+                    },
                   ),
                   InputTextFormatedField(
                     hintText: 'Seu numero',
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      phoneNumber = value;
+                    },
                     maskText: maskPhoneNumber,
                   ),
                   InputTextField(
                     hintText: 'E-mail',
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      email = value;
+                    },
                   ),
                   Container(
                     margin: const EdgeInsets.only(top: 10),
@@ -84,7 +98,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         InputTextField(
                           maxLines: 8,
                           hintText: '',
-                          onChanged: (value) {},
+                          onChanged: (value) {
+                            address = value;
+                          },
                         ),
                       ],
                     ),
@@ -98,69 +114,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           'Metodo de Pagamento',
                           style: TextStyles.titleListTile,
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            messageConfirmation(
-                              context,
-                              'Checkout',
-                              'Deseja alterar o metodo de pagamento?',
-                              () {
-                                Navigator.pop(context);
-                              },
-                              () {},
-                            );
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.only(
-                              top: 10,
-                              bottom: 10,
-                              left: 10,
-                              right: 10,
-                            ),
-                            padding: const EdgeInsets.only(
-                              bottom: 8,
-                              left: 20,
-                              top: 8,
-                            ),
-                            decoration: const BoxDecoration(
-                              color: AppColors.background,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(7)),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: AppColors.dark,
-                                  offset: Offset(0.1, 0.1),
-                                  blurRadius: 3.0,
-                                )
-                              ],
-                            ),
-                            child: Row(
-                              children: <Widget>[
-                                const Icon(
-                                  Icons.credit_card,
-                                  size: 50,
-                                ),
-                                Container(
-                                  margin: const EdgeInsets.only(left: 5),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text(
-                                        'Master Card',
-                                        style: TextStyles.trailingRegular,
-                                      ),
-                                      Text(
-                                        '**** **** **** 1234',
-                                        style: TextStyles.trailingRegular,
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
+                        const MethodPaymentSelector(),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
@@ -170,7 +124,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
                             ),
                             InputTextField(
                               hintText: 'Codigo promocional',
-                              onChanged: (value) {},
+                              onChanged: (value) {
+                                promotionalCode = value;
+                              },
                             ),
                           ],
                         ),
@@ -186,7 +142,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
                               InputTextField(
                                 maxLines: 8,
                                 hintText: '',
-                                onChanged: (value) {},
+                                onChanged: (value) {
+                                  informationOrder = value;
+                                },
                               ),
                             ],
                           ),
@@ -228,7 +186,44 @@ class _CheckoutPageState extends State<CheckoutPage> {
                             RoundedButton(
                               width: size.width * 0.93,
                               text: 'Finalizar compra',
-                              press: () {},
+                              press: () async {
+                                if (userName == '') {
+                                  messageDialog(
+                                    context,
+                                    'Erro',
+                                    'Nome de usuairo não definido',
+                                  );
+                                  return;
+                                }
+
+                                if (phoneNumber == '') {
+                                  messageDialog(
+                                    context,
+                                    'Erro',
+                                    'Numero do telefone não informado!',
+                                  );
+                                  return;
+                                }
+
+                                if (email == '') {
+                                  messageDialog(
+                                    context,
+                                    'Erro',
+                                    'E-mail do usuario não informado!',
+                                  );
+                                  return;
+                                }
+
+                                await purchasesController.finallyPurchaseOrder(
+                                  context,
+                                  userName,
+                                  phoneNumber,
+                                  address,
+                                  email,
+                                  promotionalCode,
+                                  informationOrder,
+                                );
+                              },
                             ),
                           ],
                         ),

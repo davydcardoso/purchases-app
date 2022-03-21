@@ -6,7 +6,6 @@ import 'package:application/components/rounded_password_field.dart';
 import 'package:application/modules/login/controllers/login_controller.dart';
 import 'package:application/shared/themes/app_colors.dart';
 import 'package:application/shared/themes/app_images.dart';
-import 'package:flutter_svg/svg.dart';
 
 class Body extends StatefulWidget {
   const Body({
