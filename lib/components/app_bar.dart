@@ -4,15 +4,17 @@ import 'package:flutter/material.dart';
 
 class AppBarApp extends StatelessWidget {
   final String username;
+  final VoidCallback onPressFunction;
   const AppBarApp({
     Key? key,
     required this.username,
+    required this.onPressFunction,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 152,
+      height: 140,
       color: AppColors.primary,
       child: Center(
         child: ListTile(
@@ -36,24 +38,18 @@ class AppBarApp extends StatelessWidget {
             onTap: () {
               // Scaffold.of(context).openDrawer();
             },
-            child: Container(
-              width: 48,
-              height: 48,
-              decoration: BoxDecoration(
-                color: AppColors.grey,
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: Column(
-                children: <Widget>[
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.shopping_basket_outlined,
-                      color: AppColors.background,
-                    ),
-                  )
-                ],
-              ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                IconButton(
+                  onPressed: onPressFunction,
+                  icon: const Icon(
+                    Icons.search,
+                    color: AppColors.stroke,
+                    size: 40,
+                  ),
+                ),
+              ],
             ),
           ),
         ),

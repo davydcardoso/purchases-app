@@ -60,6 +60,22 @@ class AuthController {
     setUser(context, null);
   }
 
+  Future<UserModel> getUserSession() async {
+    final instance = await SharedPreferences.getInstance();
+    final isAdmin = instance.get('isAdmin') as bool;
+    final token = instance.get('token') as String;
+    final name = instance.get('name') as String;
+    final id = instance.get('id') as String;
+
+    final user = UserModel(
+      isAdmin: isAdmin,
+      name: name,
+      token: token,
+      id: id,
+    );
+    return user;
+  }
+
   Future<void> singOut(BuildContext context) async {
     final instance = await SharedPreferences.getInstance();
     await instance.remove('isAdmin');

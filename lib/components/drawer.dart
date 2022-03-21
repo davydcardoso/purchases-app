@@ -46,7 +46,16 @@ class DrawerDashboard extends StatelessWidget {
                         Icons.face,
                         color: AppColors.dark,
                       ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.popAndPushNamed(
+                    context,
+                    '/dashboard',
+                    arguments: {
+                      'name': username,
+                      'isAdmin': isAdmin,
+                    },
+                  );
+                },
               ),
             ),
           ),
@@ -67,7 +76,14 @@ class DrawerDashboard extends StatelessWidget {
             ListTile(
               title: const Text('Comprar'),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.popAndPushNamed(
+                  context,
+                  '/purchases-home',
+                  arguments: {
+                    'name': username,
+                    'isAdmin': isAdmin,
+                  },
+                );
               },
             ),
             ListTile(

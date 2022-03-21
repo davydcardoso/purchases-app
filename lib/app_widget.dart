@@ -1,4 +1,5 @@
 import 'package:application/modules/add_address_users/add_address_users_page.dart';
+import 'package:application/modules/checkout/checkout_page.dart';
 import 'package:application/modules/dashboard/dashboard_page.dart';
 import 'package:application/modules/login/login_page.dart';
 import 'package:application/modules/purchases/puchases_page.dart';
@@ -35,6 +36,7 @@ class AppWidget extends StatelessWidget {
         '/address-create': (context) => const AddAddressUserPage(),
         '/dashboard': (context) => const DashboardPage(),
         '/purchases-home': (context) => const PurchasePage(),
+        '/checkout': (context) => const CheckoutPage(),
       },
     );
   }

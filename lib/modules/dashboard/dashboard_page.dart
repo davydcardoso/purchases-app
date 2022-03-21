@@ -1,6 +1,6 @@
 import 'package:application/components/app_bar.dart';
 import 'package:application/components/bottom_navigation_bar.dart';
-import 'package:application/modules/dashboard/components/drawer.dart';
+import 'package:application/components/drawer.dart';
 import 'package:application/modules/dashboard/components/home_page.dart';
 import 'package:application/modules/dashboard/controllers/index_page_controller.dart';
 import 'package:flutter/material.dart';
@@ -37,8 +37,11 @@ class _DashboardPageState extends State<DashboardPage> {
             username: params['name'] as String,
           ),
           appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(90),
-            child: AppBarApp(username: params['name']),
+            preferredSize: const Size.fromHeight(75),
+            child: AppBarApp(
+              username: params['name'],
+              onPressFunction: () {},
+            ),
           ),
           body: pages[pageController.currentPage],
           bottomNavigationBar: BottomNavigationBarApp(
