@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:application/shared/model/user_model.dart';
@@ -33,6 +35,11 @@ class AuthController {
     await instance.setString('name', user.name);
     await instance.setString('id', user.id);
     return;
+  }
+
+  Future<void> saveMethodPaymentsUser(dynamic jsonMap) async {
+    final instance = await SharedPreferences.getInstance();
+    await instance.setString('user.payment-method', jsonEncode(jsonMap));
   }
 
   Future<void> verifyUserSession(BuildContext context) async {

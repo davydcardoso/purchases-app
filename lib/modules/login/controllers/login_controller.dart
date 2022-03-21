@@ -33,6 +33,9 @@ class LoginController {
       switch (response.statusCode) {
         case 200:
           final user = UserModel.fromJson(response.body);
+          authController.saveMethodPaymentsUser(
+            jsonMap['user']['paymentsMethods'],
+          );
           authController.setUser(context, user);
           break;
         case 400:
