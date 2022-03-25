@@ -130,7 +130,7 @@ class _PurchasePageState extends State<PurchasePage> {
               },
             );
           },
-          child: const Icon(Icons.shopify),
+          child: const Icon(Icons.shopping_cart_checkout_outlined),
           elevation: 30,
         ),
       ),

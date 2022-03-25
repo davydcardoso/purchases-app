@@ -89,7 +89,14 @@ class DrawerDashboard extends StatelessWidget {
             ListTile(
               title: const Text('Meus Pedidos'),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.popAndPushNamed(
+                  context,
+                  '/purchases-list',
+                  arguments: {
+                    'name': username,
+                    'isAdmin': isAdmin,
+                  },
+                );
               },
             ),
             ListTile(

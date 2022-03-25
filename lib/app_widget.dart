@@ -2,6 +2,7 @@ import 'package:application/modules/add_address_users/add_address_users_page.dar
 import 'package:application/modules/checkout/checkout_page.dart';
 import 'package:application/modules/dashboard/dashboard_page.dart';
 import 'package:application/modules/login/login_page.dart';
+import 'package:application/modules/purchase_list/purchase_list.dart';
 import 'package:application/modules/purchases/puchases_page.dart';
 import 'package:application/modules/signup/signup_page.dart';
 import 'package:application/modules/splash/splash_page.dart';
@@ -37,6 +38,7 @@ class AppWidget extends StatelessWidget {
         '/dashboard': (context) => const DashboardPage(),
         '/purchases-home': (context) => const PurchasePage(),
         '/checkout': (context) => const CheckoutPage(),
+        '/purchases-list': (context) => const PurchaseListPage(),
       },
     );
   }
